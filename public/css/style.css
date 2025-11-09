@@ -25,9 +25,17 @@ body {
     line-height: 1.5;
 }
 
-a {
+li {
+    list-style: none;
+}
+
+a,
+a:visited {
     text-decoration: none;
-    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -113,3 +121,45 @@ header {
     font-weight: 400;
 }
 
+.about {
+    margin-top: 1.5rem;
+    color: #fff;
+    background: #0057ff;
+}
+
+.about-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.about-wrap {
+    margin-top: 2.25rem;
+}
+
+.about-list {
+    padding-bottom: 2.25rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.list__item {
+    flex: 0 0 auto;
+    width: 12.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.item__count {
+    font-weight: 300;
+    font-size: 3rem;
+}
+
+.item__desc {
+    font-weight: 400;
+    font-size: 1.125rem;
+}
