@@ -59,6 +59,7 @@ img {
     max-width: 26rem; /*412px*/
     margin: 0 auto;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 .container {
@@ -121,6 +122,8 @@ header {
     font-weight: 400;
 }
 
+/*=====SECTION ABOUT=======*/
+
 .about {
     margin-top: 1.5rem;
     color: #fff;
@@ -162,4 +165,143 @@ header {
 .item__desc {
     font-weight: 400;
     font-size: 1.125rem;
+}
+
+/*=====SECTION MESSAGES=======*/
+.messages {
+    margin-top: 2.625rem;
+}
+
+.messages-title {
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.messages-wrap {
+    margin-top: 1.5rem;
+}
+
+.messages-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.user + .user::before {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    content: "";
+    display: block;
+    width: 100vw;
+    height: 1px;
+    background: #e9e9e9;
+    margin-left: calc(50% - 50vw);
+}
+
+.user-inner {
+    display: flex;
+    gap: 1rem;
+}
+
+.user-photo {
+    width: 3.25rem;
+    height: 3.25rem;
+    flex-shrink: 0;
+}
+
+.user-photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.name {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.name-title {
+    font-weight: 900;
+    font-size: 0.875rem;
+    line-height: 129%;
+    color: #1d1e22;
+}
+
+.name-nickname {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 129%;
+    color: #abacb1;
+}
+
+.name-last-seen {
+    max-width: 3.25rem;
+}
+
+.name-last-seen-desc {
+    font-weight: 400;
+    font-size: 0.625rem;
+    line-height: 100%;
+    text-align: right;
+    color: #abacb1;
+}
+
+.user-body {
+    margin-top: 0.625rem;
+
+}
+
+.user-body-desc {
+    font-weight: 400;
+    font-size: 1rem;
+    color: #1d1e22;
+}
+
+.user-body-img {
+    margin-top: 1rem;
+    max-width: 100%;
+}
+
+.user-body-img img {
+    width: 100%;
+    height: auto;
+}
+
+.user-footer {
+    margin-top: 0.3125rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.user-footer-btn {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.user-footer-btn button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    width: 0.9375rem;
+    height: 0.9375rem;
+}
+
+.user-footer-btn button svg {
+    width: 100%;
+    height: auto;
+}
+
+.user-footer-btn p {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 171%;
+    color: #b1b1b1;
 }
