@@ -98,7 +98,7 @@ header {
 .nav-block {
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
+    gap: 1rem;
 }
 
 .nav-block_button {
@@ -305,3 +305,20 @@ header {
     line-height: 171%;
     color: #b1b1b1;
 }
+
+/*=====FOOTER=======*/
+footer {
+    padding-bottom: 2rem;
+}
+.footer-title {
+    margin-top: 2rem;
+    font-weight: 900;
+    font-size: 2rem;
+    text-align: center;
+    color: #000;
+}
+
+.footer-nav {
+    margin-top: 1.5rem;
+}
+
