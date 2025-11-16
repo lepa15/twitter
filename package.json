@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha tests"
+    "test": "npx mocha tests",
+    "lint": "npx eslint ."
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,9 @@
   "homepage": "https://github.com/lepa15/twitter#readme",
   "devDependencies": {
     "chai": "^6.2.1",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
     "mocha": "^11.7.5"
   }
 }
