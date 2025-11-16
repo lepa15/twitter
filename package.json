@@ -1,0 +1,24 @@
+{
+  "name": "twitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lepa15/twitter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lepa15/twitter/issues"
+  },
+  "homepage": "https://github.com/lepa15/twitter#readme",
+  "devDependencies": {
+    "chai": "^6.2.1",
+    "mocha": "^11.7.5"
+  }
+}
