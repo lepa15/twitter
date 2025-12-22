@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/gh/john-doherty/swiped-events/dist/swiped-events.min.js"></script>
+
 <div class="wrapper">
     <header>
         <div class="container">
@@ -21,8 +23,8 @@
                 с друзьями, даже когда их нет рядом
             </h1>
             <div class="header-nav nav-block">
-                <button class="nav-block_button">Зарегистрироваться</button>
-                <button class="nav-block_button">Войти</button>
+                <button class="nav-block_button register-btn">Зарегистрироваться</button>
+                <button class="nav-block_button login-btn">Войти</button>
             </div>
         </div>
     </header>
@@ -306,11 +308,46 @@
                 и узнайте обо всём первым
             </h1>
             <div class="footer-nav nav-block">
-                <button class="nav-block_button">Зарегистрироваться</button>
-                <button class="nav-block_button">Войти</button>
+                <button class="nav-block_button register-btn">Зарегистрироваться</button>
+                <button class="nav-block_button login-btn">Войти</button>
             </div>
         </div>
     </footer>
 </div>
+<div id="modal" class="modal">
+    <div class="overlay"></div>
+    <div class="modal__content">
+        <div class="container">
+            <div class="modal__handle"></div>
+            <div class="modal__body">
+                <h2 class="modal__title">Авторизация</h2>
+                <form class="modal__form form">
+                    <div class="form__field">
+                        <div class="form__contain">
+                            <input name="email"
+                                   id="email"
+                                   type="email"
+                                   placeholder=" "
+                            >
+                            <label for="email">Электронная почта</label>
+                        </div>
+                    </div>
+                    <div class="form__field">
+                        <div class="form__contain">
+                            <input name="password"
+                                   id="password"
+                                   type="password"
+                                   placeholder=" "
+                            >
+                            <label for="password">Пароль</label>
+                        </div>
+                    </div>
+                    <button type="submit">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script src="./assets/openRegister.js"></script>
 </html>
