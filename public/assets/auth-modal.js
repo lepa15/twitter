@@ -46,6 +46,19 @@ function renderForm() {
   }
 }
 
+// Функция для отключения/включения скролла для body при открытой/закрытой модалке
+function toggleScroll() {
+  const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+  if (modal.classList.contains('open')) {
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
+    document.body.style.overflow = 'hidden';
+  } else if (!modal.classList.contains('open')) {
+    document.body.style.paddingRight = '0px';
+    document.body.style.overflow = 'auto';
+  }
+}
+
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.register-btn, .login-btn');
   if (!btn) return;
@@ -58,12 +71,14 @@ document.addEventListener('click', (e) => {
   }
   renderForm();
   modal.classList.add('open');
+  toggleScroll();
 });
 
 // Закрываем модалку по свайпу
 document.addEventListener('swiped-down', (e) => {
   if (e.target === modalHandle) {
     modal.classList.remove('open');
+    toggleScroll();
   }
 });
 
@@ -73,6 +88,7 @@ document.addEventListener('click', (e) => {
   if (!overlay) return;
   if (overlay) {
     modal.classList.remove('open');
+    toggleScroll();
   }
 });
 
@@ -80,5 +96,6 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     modal.classList.remove('open');
+    toggleScroll();
   }
 });
