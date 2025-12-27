@@ -310,6 +310,7 @@ header {
 footer {
     padding-bottom: 2rem;
 }
+
 .footer-title {
     margin-top: 2rem;
     font-weight: 900;
@@ -321,4 +322,132 @@ footer {
 .footer-nav {
     margin-top: 1.5rem;
 }
+
+/*=====MODAL=======*/
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.modal.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.open .overlay {
+    opacity: 1;
+}
+
+.modal__content {
+    position: relative;
+    max-width: 26rem;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background-color: #fff;
+    z-index: 10;
+    transform: translateY(100%);
+    transition: transform 0.35s ease-in-out;
+}
+
+.modal.open .modal__content {
+    transform: translateY(0);
+}
+
+.modal__handle {
+    margin: 1rem auto 0 auto;
+    width: 50px;
+    height: 4px;
+    border-radius: 2px;
+    background: #ABACB1;
+}
+
+.modal__body {
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.modal__title {
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 117%;
+    color: #1d1e22;
+}
+
+.modal__form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form__field {
+    position: relative;
+    border: 1px solid #dfdfdf;
+    border-radius: 10px;
+}
+
+.form__contain {
+    padding: 1rem;
+}
+
+.form__contain label {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    transform-origin: top left;
+    transform: translateY(0%) scale(1);
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: #b1b1b1;
+    transition: transform 0.35s ease;
+}
+
+.form__contain input:focus + label,
+.form__contain input:not(:placeholder-shown) + label {
+    transform: translateY(-0.25rem) scale(0.5);
+}
+
+.form__contain input {
+    outline: none;
+    border: none;
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: #555;
+    transform: translateY(0);
+    transition: transform 0.35s ease;
+}
+
+.form__contain input:focus,
+.form__contain input:not(:placeholder-shown) {
+    transform: translateY(0.4375rem);
+}
+
+form button {
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #0057ff;
+    border-radius: 10px;
+    background: #0057ff;
+}
+
+
+
 
