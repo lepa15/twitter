@@ -401,6 +401,31 @@ footer {
     border-radius: 10px;
 }
 
+.form__field.error {
+    border: 1px solid #ff97c3;
+    background: #ffdeec;
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+.form__field.error input {
+    background: transparent;
+}
+
+.form__field_error {
+    position: absolute;
+    left: 1rem;
+    bottom: -1rem;
+    opacity: 0;
+    font-weight: 400;
+    font-size: 0.5625rem;
+    color: #e40060;
+    transition: opacity 0.3s ease;
+}
+
+.form__field_error.show {
+    opacity: 1;
+}
+
 .form__contain {
     padding: 1rem;
 }

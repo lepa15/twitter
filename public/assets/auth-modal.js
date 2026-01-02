@@ -8,6 +8,10 @@ const formState = {
   mode: 'login',
 };
 
+function getFormState() {
+  return formState;
+}
+
 // Добавляем подтверждение пароля для регистрации
 function createConfirmPasswordField() {
   const field = document.createElement('div');
@@ -24,6 +28,9 @@ function createConfirmPasswordField() {
   label.innerHTML = 'Подтвердите пароль';
   contain.append(input, label);
   field.append(contain);
+  const span = document.createElement('span');
+  span.className = 'form__field_error';
+  field.append(span);
   return field;
 }
 
@@ -74,11 +81,21 @@ document.addEventListener('click', (e) => {
   toggleScroll();
 });
 
+// Закрытие модалки
+function closeModal() {
+  const formField = modal.querySelectorAll('.form__field');
+  const errorSpan = modal.querySelectorAll('.form__field_error');
+  modal.classList.remove('open');
+  toggleScroll();
+  modalForm.reset();
+  formField.forEach((field) => field.classList.remove('error'));
+  errorSpan.forEach((span) => span.classList.remove('show'));
+}
+
 // Закрываем модалку по свайпу
 document.addEventListener('swiped-down', (e) => {
   if (e.target === modalHandle) {
-    modal.classList.remove('open');
-    toggleScroll();
+    closeModal();
   }
 });
 
@@ -87,15 +104,15 @@ document.addEventListener('click', (e) => {
   const overlay = e.target.closest('.overlay');
   if (!overlay) return;
   if (overlay) {
-    modal.classList.remove('open');
-    toggleScroll();
+    closeModal();
   }
 });
 
 // Закрываем модалку по нажатию клавиши Escape
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    modal.classList.remove('open');
-    toggleScroll();
+    closeModal();
   }
 });
+
+export default getFormState;
