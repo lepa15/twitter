@@ -1,7 +1,6 @@
 import checkValidEmail from './check_valid_email.js';
 import getFormState from './auth-modal.js';
 
-const modeFormState = getFormState();
 const form = document.querySelector('.modal__form');
 
 function validateRegisterForm(data, mode) {
@@ -63,6 +62,7 @@ form.addEventListener('submit', (e) => {
 
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
+  const modeFormState = getFormState();
 
   const result = validateRegisterForm(data, modeFormState.mode);
   clearErrors();
