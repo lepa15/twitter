@@ -9,6 +9,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "clean": "rm -rf dist",
     "test": "npx mocha ./tests",
     "lint": "npx eslint src",
     "fix": "npx eslint src --fix"
