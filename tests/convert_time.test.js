@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import convertTime from '../public/assets/convert_time.js';
+import convertTime from '../src/convert_time.js';
 
 describe('Функция для преобразования числа во время', () => {
   it("должно вернуть 'только что' если прошло < 1 минуты", () => {

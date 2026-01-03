@@ -1,13 +1,17 @@
 {
   "name": "twitter",
+  "private": true,
+  "type": "module",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha tests",
-    "lint": "npx eslint .",
-    "fix": "npx eslint . --fix"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "npx mocha ./tests",
+    "lint": "npx eslint src",
+    "fix": "npx eslint src --fix"
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,7 @@
   },
   "homepage": "https://github.com/lepa15/twitter#readme",
   "devDependencies": {
+    "vite": "^7.2.4",
     "chai": "^6.2.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import highlightHashtags from '../public/assets/highlightHashtags.js';
+import highlightHashtags from '../src/highlightHashtags.js';
 
 describe('Функция по подстветке хештегов', () => {
   it('должна подсветить один хэштег', () => {
