@@ -96,6 +96,9 @@ function renderUserPost(userPostsData) {
                </div>
                <div class="user-body">
                    <p class="user-body-desc">${msg.text}</p>
+                   <div class="user-body-img">
+                       ${msg.image ? `<img src="${msg.image}" alt="message photo">` : ''}
+                   </div>
                </div>
                <div class="user-footer">
                    <div class="user-footer-btn">
@@ -134,7 +137,7 @@ function renderUserPost(userPostsData) {
                </div>
            </div>
        </div>
-     </li>
+    </li>
     `;
     messagesWrap.insertAdjacentHTML('beforeend', messageItem);
   });
@@ -147,4 +150,6 @@ async function initUserPosts() {
   renderUserPost(usersData);
 }
 
-await initUserPosts();
+window.addEventListener('DOMContentLoaded', async () => {
+  await initUserPosts();
+});
