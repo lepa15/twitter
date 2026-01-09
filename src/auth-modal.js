@@ -2,7 +2,7 @@ const modal = document.getElementById('modal');
 const modalTitle = document.querySelector('.modal__title');
 const modalForm = document.querySelector('.modal__form');
 const submitButton = modal.querySelector('button[type="submit"]');
-const modalHandle = modal.querySelector('.modal__handle');
+const modalHandle = modal.querySelectorAll('.modal__handle');
 
 const formState = {
   mode: 'login',
@@ -93,10 +93,12 @@ function closeModal() {
 }
 
 // Закрываем модалку по свайпу
-document.addEventListener('swiped-down', (e) => {
-  if (e.target === modalHandle) {
-    closeModal();
-  }
+modalHandle.forEach((handle) => {
+  document.addEventListener('swiped-down', (e) => {
+    if (e.target === handle) {
+      closeModal();
+    }
+  });
 });
 
 // Закрываем модалку по клику на подложку
