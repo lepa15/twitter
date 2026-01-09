@@ -17,7 +17,16 @@ async function getPicturesInfo() {
   return pictures;
 }
 
-function normalize(messages, pictures) {
+async function getStatisticsInfo() {
+  const statisticResponse = await fetch('https://burtovoy.github.io/statistic.json');
+  if (!statisticResponse.ok) {
+    throw new Error(statisticResponse.statusText);
+  }
+  const { statistic } = await statisticResponse.json();
+  return statistic;
+}
+
+function normalize(messages, pictures, statistics) {
   const usersById = {};
   const messagesList = [];
 
@@ -64,6 +73,7 @@ function normalize(messages, pictures) {
   return {
     usersById,
     messagesList,
+    statistics,
   };
 }
 
@@ -71,10 +81,13 @@ function renderUserPost(userPostsData) {
   const {
     usersById,
     messagesList,
+    statistics,
   } = userPostsData;
 
   const messagesWrap = document.querySelector('.messages-list');
   if (!messagesWrap) return;
+  const statisticsWrap = document.querySelector('.about-list');
+  if (!statisticsWrap) return;
 
   messagesList.forEach((msg) => {
     const user = usersById[msg.userId];
@@ -141,12 +154,34 @@ function renderUserPost(userPostsData) {
     `;
     messagesWrap.insertAdjacentHTML('beforeend', messageItem);
   });
+
+  const {
+    usersRegistr,
+    writMessages,
+    writToday,
+  } = statistics;
+
+  statisticsWrap.innerHTML = `
+    <li class="list__item item">
+        <p class="item__count">${usersRegistr}</p>
+        <p class="item__desc">Пользователей зарегестрировано</p>
+    </li>
+    <li class="list__item item">
+        <p class="item__count">${writMessages}</p>
+        <p class="item__desc">Сообщений <br> написано</p>
+    </li>
+    <li class="list__item item">
+        <p class="item__count">${writToday}</p>
+        <p class="item__desc">Написано <br> сегодня</p>
+    </li>
+  `;
 }
 
 async function initUserPosts() {
   const messages = await getMessagesInfo();
   const pictures = await getPicturesInfo();
-  const usersData = normalize(messages, pictures);
+  const statistics = await getStatisticsInfo();
+  const usersData = normalize(messages, pictures, statistics);
   renderUserPost(usersData);
 }
 
