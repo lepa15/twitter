@@ -3,6 +3,7 @@ const modalTitle = document.querySelector('.modal__title');
 const modalForm = document.querySelector('.modal__form');
 const submitButton = modal.querySelector('button[type="submit"]');
 const modalHandle = modal.querySelectorAll('.modal__handle');
+const modalContent = modal.querySelector('.modal__content');
 
 const formState = {
   mode: 'login',
@@ -60,6 +61,7 @@ function toggleScroll() {
   if (modal.classList.contains('open')) {
     document.body.style.paddingRight = `${scrollBarWidth}px`;
     document.body.style.overflow = 'hidden';
+    modalContent.style.marginRight = `${scrollBarWidth}px`;
   } else if (!modal.classList.contains('open')) {
     document.body.style.paddingRight = '0px';
     document.body.style.overflow = 'auto';
