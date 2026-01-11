@@ -178,13 +178,40 @@ function renderUserPost(userPostsData) {
 }
 
 async function initUserPosts() {
-  const messages = await getMessagesInfo();
-  const pictures = await getPicturesInfo();
-  const statistics = await getStatisticsInfo();
+  const [messages, pictures, statistics] = await Promise.all([
+    getMessagesInfo(),
+    getPicturesInfo(),
+    getStatisticsInfo(),
+  ]);
   const usersData = normalize(messages, pictures, statistics);
   renderUserPost(usersData);
 }
 
+let loader = null;
+
+function initLoader() {
+  loader = document.getElementById('loader');
+  if (!loader) {
+    throw new Error('Loader element is not found');
+  }
+}
+
+function showLoader() {
+  loader.classList.remove('hidden');
+}
+
+function hideLoader() {
+  loader.classList.add('hidden');
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
-  await initUserPosts();
+  initLoader();
+  showLoader();
+  try {
+    await initUserPosts();
+  } catch (error) {
+    throw new Error('Unable to load user data');
+  } finally {
+    hideLoader();
+  }
 });
