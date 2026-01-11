@@ -1,3 +1,6 @@
+import convertTime from './convert_time.js';
+import convertToISO from './convert_to_ISO.js';
+
 async function getMessagesInfo() {
   const messagesResponse = await fetch('https://burtovoy.github.io/messages.json');
   if (!messagesResponse.ok) {
@@ -55,7 +58,7 @@ function normalize(messages, pictures, statistics) {
       userId,
       text,
       image: image ?? null,
-      createdAt,
+      createdAt: convertToISO(createdAt),
       ...rest,
     });
   });
@@ -88,11 +91,13 @@ function renderUserPost(userPostsData) {
   if (!messagesWrap) return;
   const statisticsWrap = document.querySelector('.about-list');
   if (!statisticsWrap) return;
+  messagesWrap.innerHTML = '';
 
   messagesList.forEach((msg) => {
     const user = usersById[msg.userId];
-    const messageItem = `
-    <li class="messages-item user">
+    const messageItem = document.createElement('li');
+    messageItem.className = 'messages-item user';
+    messageItem.innerHTML = `
        <div class="user-inner">
            <div class="user-photo">
                <img src="${user.avatarUrl}" alt="user photo">
@@ -104,7 +109,7 @@ function renderUserPost(userPostsData) {
                        <p class="name-nickname">${user.mail}</p>
                    </div>
                    <div class="name-last-seen">
-                       <p class="name-last-seen-desc">${msg.createdAt}</p>
+                       <p class="name-last-seen-desc"></p>
                    </div>
                </div>
                <div class="user-body">
@@ -150,9 +155,17 @@ function renderUserPost(userPostsData) {
                </div>
            </div>
        </div>
-    </li>
     `;
-    messagesWrap.insertAdjacentHTML('beforeend', messageItem);
+    messagesWrap.appendChild(messageItem);
+
+    const timeEl = messageItem.querySelector('.name-last-seen-desc');
+    const postDate = new Date(msg.createdAt);
+
+    function updatePostDate() {
+      timeEl.textContent = `${convertTime(postDate, new Date())}`;
+    }
+    updatePostDate();
+    setInterval(updatePostDate, 1000);
   });
 
   const {

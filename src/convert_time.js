@@ -27,3 +27,5 @@ export default function convertTime(postDate, currentDate) {
   if (months < 12) return `${months} ${pluralize(months, 'месяц', 'месяца', 'месяцев')} назад`;
   return `${years} ${pluralize(years, 'год', 'года', 'лет')} назад`;
 }
+const post = new Date('23.10.2023 16:57');
+const current = new Date('2025-01-01T12:05:00Z');
