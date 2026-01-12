@@ -209,17 +209,12 @@ function initLoader() {
   }
 }
 
-function showLoader() {
-  loader.classList.remove('hidden');
-}
-
 function hideLoader() {
   loader.classList.add('hidden');
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
   initLoader();
-  showLoader();
   try {
     await initUserPosts();
   } catch (error) {

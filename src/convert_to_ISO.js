@@ -13,5 +13,3 @@ export default function convertToISO(dateString) {
 
   return date.toISOString();
 }
-
-const dateStringToISO = '23.10.2023 16:57';
