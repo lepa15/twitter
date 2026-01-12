@@ -1,6 +1,3 @@
-import convertTime from './convert_time.js';
-import convertToISO from './convert_to_ISO.js';
-
 async function getMessagesInfo() {
   const messagesResponse = await fetch('https://burtovoy.github.io/messages.json');
   if (!messagesResponse.ok) {
@@ -58,7 +55,7 @@ function normalize(messages, pictures, statistics) {
       userId,
       text,
       image: image ?? null,
-      createdAt: convertToISO(createdAt),
+      createdAt,
       ...rest,
     });
   });
@@ -91,13 +88,11 @@ function renderUserPost(userPostsData) {
   if (!messagesWrap) return;
   const statisticsWrap = document.querySelector('.about-list');
   if (!statisticsWrap) return;
-  messagesWrap.innerHTML = '';
 
   messagesList.forEach((msg) => {
     const user = usersById[msg.userId];
-    const messageItem = document.createElement('li');
-    messageItem.className = 'messages-item user';
-    messageItem.innerHTML = `
+    const messageItem = `
+    <li class="messages-item user">
        <div class="user-inner">
            <div class="user-photo">
                <img src="${user.avatarUrl}" alt="user photo">
@@ -109,7 +104,7 @@ function renderUserPost(userPostsData) {
                        <p class="name-nickname">${user.mail}</p>
                    </div>
                    <div class="name-last-seen">
-                       <p class="name-last-seen-desc"></p>
+                       <p class="name-last-seen-desc">${msg.createdAt}</p>
                    </div>
                </div>
                <div class="user-body">
@@ -155,17 +150,9 @@ function renderUserPost(userPostsData) {
                </div>
            </div>
        </div>
+    </li>
     `;
-    messagesWrap.appendChild(messageItem);
-
-    const timeEl = messageItem.querySelector('.name-last-seen-desc');
-    const postDate = new Date(msg.createdAt);
-
-    function updatePostDate() {
-      timeEl.textContent = `${convertTime(postDate, new Date())}`;
-    }
-    updatePostDate();
-    setInterval(updatePostDate, 1000);
+    messagesWrap.insertAdjacentHTML('beforeend', messageItem);
   });
 
   const {
@@ -191,35 +178,13 @@ function renderUserPost(userPostsData) {
 }
 
 async function initUserPosts() {
-  const [messages, pictures, statistics] = await Promise.all([
-    getMessagesInfo(),
-    getPicturesInfo(),
-    getStatisticsInfo(),
-  ]);
+  const messages = await getMessagesInfo();
+  const pictures = await getPicturesInfo();
+  const statistics = await getStatisticsInfo();
   const usersData = normalize(messages, pictures, statistics);
   renderUserPost(usersData);
 }
 
-let loader = null;
-
-function initLoader() {
-  loader = document.getElementById('loader');
-  if (!loader) {
-    throw new Error('Loader element is not found');
-  }
-}
-
-function hideLoader() {
-  loader.classList.add('hidden');
-}
-
 window.addEventListener('DOMContentLoaded', async () => {
-  initLoader();
-  try {
-    await initUserPosts();
-  } catch (error) {
-    throw new Error('Unable to load user data');
-  } finally {
-    hideLoader();
-  }
+  await initUserPosts();
 });

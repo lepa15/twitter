@@ -10,5 +10,6 @@ export default function convertToISO(dateString) {
     Number(hour),
     Number(minute),
   ));
+
   return date.toISOString();
 }
