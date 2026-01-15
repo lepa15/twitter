@@ -1,5 +1,5 @@
-import checkValidEmail from './check_valid_email.js';
-import getFormState from './auth-modal.js';
+import checkValidEmail from './check_valid_email';
+import getFormState from './auth-modal';
 
 const form = document.querySelector('.modal__form');
 

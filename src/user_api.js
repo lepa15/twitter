@@ -1,5 +1,5 @@
-import convertTime from './convert_time.js';
-import convertToISO from './convert_to_ISO.js';
+import convertTime from './convert_time';
+import convertToISO from './convert_to_ISO';
 
 async function getMessagesInfo() {
   const messagesResponse = await fetch('https://burtovoy.github.io/messages.json');
