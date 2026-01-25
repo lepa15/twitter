@@ -21,6 +21,12 @@
     "import/resolver": {
       "node": {
         "extensions": [".js", ".jsx", ".json"]
+      },
+      "alias": {
+        "map": [
+          ["@", "./src"]
+        ],
+        "extensions": [".js", ".jsx", ".json"]
       }
     }
   },
