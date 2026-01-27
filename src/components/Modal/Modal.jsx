@@ -1,12 +1,15 @@
 import './Modal.css';
 import ModalForm from '@/components/ModalForm/ModalForm';
 import { useEffect, useState } from 'react';
+import useLockBodyScroll from '@/hooks/useLockBodyScroll';
 
 function Modal({
   authModal,
   onClose,
   isOpen,
 }) {
+  useLockBodyScroll(isOpen);
+
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimated, setIsAnimated] = useState(false);
 

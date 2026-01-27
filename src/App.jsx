@@ -2,7 +2,7 @@ import './App.css';
 import Header from '@/components/Header/Header';
 import Main from '@/components/Main/Main';
 import Footer from '@/components/Footer/Footer';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/Modal/Modal';
 
@@ -24,9 +24,6 @@ function App() {
     modal.close();
   };
 
-  useEffect(() => {
-    console.log(authModal);
-  }, [authModal]);
   return (
     <div className="wrapper">
       <Header onOpenRegister={handleOpenRegisterModal} onOpenLogin={handleOpenLoginModal}/>
