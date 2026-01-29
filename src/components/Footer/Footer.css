@@ -1,0 +1,15 @@
+footer {
+    padding-bottom: 2rem;
+}
+
+.footer-title {
+    margin-top: 2rem;
+    font-weight: 900;
+    font-size: 2rem;
+    text-align: center;
+    color: #000;
+}
+
+.footer-nav {
+    margin-top: 1.5rem;
+}
