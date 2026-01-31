@@ -10,9 +10,9 @@ function Footer({
         Зарегистрируйтесь
         и узнайте обо всём первым
       </h1>
-      <div className="footer-nav nav-block">
-        <button className="nav-block_button register-btn" onClick={onOpenRegister}>Зарегистрироваться</button>
-        <button className="nav-block_button login-btn" onClick={onOpenLogin}>Войти</button>
+      <div className="footer-nav buttons-block">
+        <button className="auth-button" onClick={onOpenRegister}>Зарегистрироваться</button>
+        <button className="auth-button" onClick={onOpenLogin}>Войти</button>
       </div>
     </div>
   );

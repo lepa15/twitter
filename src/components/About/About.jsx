@@ -22,12 +22,12 @@ export default function About() {
     );
   }
   return (
-    <section className="about">
+    <>
       <div className="about-wrap">
-        <ul className="about-list list">
+        <ul className="mx-auto w-full max-w-[60rem] pt-7 pb-9 sm:px-20 sm:py-16 flex items-center flex-col sm:flex-row sm:justify-between gap-8 sm:gap-0 bg-primary text-white">
           <Statistics statistics={statistics}/>
         </ul>
       </div>
-    </section>
+    </>
   );
 }
