@@ -5,8 +5,8 @@ function Header({
   onOpenRegister,
 }) {
   return (
-    <div className="sm:flex sm:gap-9">
-      <div className="container sm:w-1/2 sm:pl-16">
+    <div className="sm:flex sm:gap-9 bg-white shadow-[0_12px_24px_-12px_rgba(0,0,0,0.25)]">
+      <div className="container mx-auto px-4 sm:w-1/2 sm:pl-16">
         <div className="mt-6 sm:mt-11 flex justify-center sm:justify-start items-center">
           <img className="w-9 sm:w-11 h-full"
                src="/delfin.svg" alt="Twitter logo"

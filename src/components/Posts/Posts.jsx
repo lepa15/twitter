@@ -23,11 +23,11 @@ export default function Posts() {
     );
   }
   return (
-    <section className="messages">
-      <div className="container">
-        <h2 className="messages-title">Последние сообщения</h2>
-        <div className="messages-wrap">
-          <ul className="messages-list">
+    <section className="mt-[2.625rem] sm:mt-16">
+      <div className="mx-auto px-4 w-full max-w-[60rem]">
+        <h2 className="font-extrabold text-2xl sm:text-4xl">Последние сообщения</h2>
+        <div className="mt-6 sm:p-4 sm:bg-white sm:overflow-hidden sm:rounded-lg">
+          <ul className="flex flex-col">
             {postsList.map((post) => {
               const user = usersById[post.userId];
               return (

@@ -8,10 +8,39 @@
     body {
         @apply font-sans;
     }
+
+    @media (min-width: 640px) {
+        body {
+            background: var(--background-desc);
+        }
+    }
 }
 
 @theme {
     --color-primary: #0057ff;
     --font-sans: 'Roboto', sans-serif;
+    --background-desc: #f4f5f6;
+}
+
+.read-button {
+    all: unset;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 69px;
+    text-align: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 140%;
+    border: 1px solid #0057ff;
+    border-radius: 5px;
+    background: #fff;
+    color: #0057ff;
+}
+
+.read-button:active {
+    background: #0057ff;
+    color: #fff;
+    font-weight: 400;
 }
 
