@@ -25,13 +25,13 @@ header {
     margin-top: 1.5rem;
 }
 
-.nav-block {
+.buttons-block {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.nav-block_button {
+.auth-button {
     all: unset;
     padding-top: 0.9375rem;
     padding-bottom: 0.9375rem;
@@ -46,7 +46,7 @@ header {
     color: #fff;
 }
 
-.nav-block_button:active {
+.auth-button:active {
     background: #fff;
     color: #0057ff;
     font-weight: 400;

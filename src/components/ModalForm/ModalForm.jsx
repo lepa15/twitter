@@ -60,7 +60,7 @@ export default function ModalForm({
 
   return (
     <>
-      <div className="container">
+      <div className="container mx-auto px-4">
         <div className="modal__handle" {...useSwipeDown(onClose)}></div>
         <div className="modal__body">
           <h2 className="modal__title">

@@ -5,16 +5,18 @@ function Footer({
   onOpenRegister,
 }) {
   return (
-    <div className="container">
-      <h1 className="footer-title">
-        Зарегистрируйтесь
-        и узнайте обо всём первым
-      </h1>
-      <div className="footer-nav nav-block">
-        <button className="nav-block_button register-btn" onClick={onOpenRegister}>Зарегистрироваться</button>
-        <button className="nav-block_button login-btn" onClick={onOpenLogin}>Войти</button>
+    <footer className="pb-8">
+      <div className="container mx-auto px-4 sm:max-w-2xl">
+        <h1 className="mt-8 font-extrabold text-[2rem] sm:text-[48px] text-center text-[#000]">
+          Зарегистрируйтесь
+          и узнайте обо всём первым
+        </h1>
+        <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+          <button className="auth-button " onClick={onOpenRegister}>Зарегистрироваться</button>
+          <button className="auth-button" onClick={onOpenLogin}>Войти</button>
+        </div>
       </div>
-    </div>
+    </footer>
   );
 }
 

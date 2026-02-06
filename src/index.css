@@ -1,68 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:wght@400;600&display=swap');
+@import "tailwindcss";
 
-html {
-    box-sizing: border-box;
+@layer base {
+    html, body, #root {
+        height: 100%;
+    }
+
+    body {
+        @apply font-sans;
+    }
+
+    @media (min-width: 640px) {
+        body {
+            background: var(--background-desc);
+        }
+    }
 }
 
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: inherit;
+@theme {
+    --color-primary: #0057ff;
+    --font-sans: 'Roboto', sans-serif;
+    --background-desc: #f4f5f6;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    color: #000;
+.read-button {
+    all: unset;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 69px;
+    text-align: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 140%;
+    border: 1px solid #0057ff;
+    border-radius: 5px;
     background: #fff;
-    font-family: "Lato", sans-serif;
-    font-size: 16px;
+    color: #0057ff;
+}
+
+.read-button:active {
+    background: #0057ff;
+    color: #fff;
     font-weight: 400;
-    line-height: 1.5;
 }
 
-li {
-    list-style: none;
-}
-
-a,
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: inherit;
-    font-size: inherit;
-    margin: 0;
-}
-
-ul, ol {
-    padding: 0;
-    margin: 0;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-.wrapper {
-    width: 100%;
-    max-width: 26rem; /*412px*/
-    margin: 0 auto;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-.container {
-    margin: 0 auto;
-    padding: 0 1rem;
-}
