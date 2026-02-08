@@ -31,6 +31,10 @@ export default function usePosts() {
   }, []);
 
   useEffect(() => {
+    console.log("data",data);
+  }, [data]);
+
+  useEffect(() => {
     (async () => {
       await loadPosts();
     })();
