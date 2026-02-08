@@ -33,7 +33,6 @@ export default function normalizePostsAdapter(messages, avatars) {
       createdAt: convertToISO(date),
       ...rest,
     });
-
     return acc;
   }, {
     usersById: {},
