@@ -1,51 +1,42 @@
 import convertToISO from '@/convert_to_ISO';
 
 export default function normalizePostsAdapter(messages, avatars) {
-  const usersById = {};
-  const postsList = [];
+  const avatarsById = avatars.reduce((acc, avs) => {
+    acc[avs.user_id] = avs.url;
+    return acc;
+  }, {});
 
-  messages.forEach((msg) => {
+  return messages.reduce((acc, msg) => {
     const {
       id,
       user_id: userId,
-      name: userName,
-      message: text,
-      img_message: image,
-      date: createdAt,
+      name,
+      message,
+      img_message: imgMessage,
+      date,
       mail,
       ...rest
     } = msg;
 
-    usersById[userId] ??= { userId };
-    usersById[userId] = {
-      ...usersById[userId],
+    acc.usersById[userId] ??= {
       userId,
-      userName,
+      userName: name,
       mail,
+      avatar: avatarsById[userId] ?? null,
     };
 
-    postsList.push({
+    acc.postsList.push({
       id,
       userId,
-      text,
-      image: image ?? null,
-      createdAt: convertToISO(createdAt),
+      postMessage: message,
+      imgMessage,
+      createdAt: convertToISO(date),
       ...rest,
     });
+
+    return acc;
+  }, {
+    usersById: {},
+    postsList: [],
   });
-
-  avatars.forEach((avatar) => {
-    const {
-      user_id: userId,
-      url: avatarUrl,
-    } = avatar;
-
-    usersById[userId] ??= { userId };
-    usersById[userId].avatarUrl ??= avatarUrl ?? 'default.png';
-  });
-
-  return {
-    usersById,
-    postsList,
-  };
 }

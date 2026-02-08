@@ -4,8 +4,10 @@ import getAvatars from '@/services/avatars.api';
 import normalizePostsAdapter from '@/adapters/postsAdapter';
 
 export default function usePosts() {
-  const [usersById, setUsersById] = useState({});
-  const [postsList, setPostsList] = useState([]);
+  const [data, setData] = useState({
+    usersById: {},
+    postsList: [],
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,8 +17,10 @@ export default function usePosts() {
     return Promise.all([getMessagesInfo(), getAvatars()])
       .then(([messages, avatars]) => {
         const result = normalizePostsAdapter(messages, avatars);
-        setUsersById(result.usersById);
-        setPostsList(result.postsList);
+        setData({
+          usersById: result.usersById,
+          postsList: result.postsList,
+        });
       })
       .catch((err) => {
         setError(err);
@@ -27,14 +31,18 @@ export default function usePosts() {
   }, []);
 
   useEffect(() => {
+    console.log("data",data);
+  }, [data]);
+
+  useEffect(() => {
     (async () => {
       await loadPosts();
     })();
   }, [loadPosts]);
 
   return {
-    usersById,
-    postsList,
+    usersById: data.usersById,
+    postsList: data.postsList,
     loading,
     error,
     reload: loadPosts,
