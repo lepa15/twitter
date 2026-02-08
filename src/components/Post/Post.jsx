@@ -22,7 +22,7 @@ const Post = memo(function Post({
     <li className="messages-item user">
       <div className="user-inner">
         <div className="user-photo">
-          <img src={user.avatarUrl} alt="user photo"/>
+          <img src={user.avatar} alt="user photo"/>
         </div>
         <div className="user-info">
           <div className="user-header name">
@@ -35,10 +35,10 @@ const Post = memo(function Post({
             </div>
           </div>
           <div className="user-body">
-            <p className="user-body-desc">{post.text}</p>
+            <p className="user-body-desc">{post.postMessage}</p>
             <div className="user-body-img">
               {post.image
-                && (<img src={post.image} alt="message photo"/>)}
+                && (<img src={post.imgMessage} alt="message photo"/>)}
             </div>
           </div>
           <div className="user-footer">

@@ -1,5 +1,6 @@
 import Post from '@/components/Post/Post';
 import usePosts from '@/hooks/usePosts';
+import { useEffect } from 'react';
 
 export default function Posts() {
   const {
