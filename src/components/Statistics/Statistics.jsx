@@ -1,26 +1,34 @@
 import Statistic from '@/components/Statistic/Statistic';
 
-export default function Statistics({ statistics }) {
+export default function Statistics({ statistic }) {
   const {
     usersRegistr,
     writMessages,
     writToday,
-  } = statistics;
+  } = statistic;
   return (
     <>
-      <Statistic statisticInfo={usersRegistr} statisticText={'Пользователей зарегестрировано'}/>
-      <Statistic statisticInfo={writMessages} statisticText={
-        <>
-          Сообщений<br/>
-          написано
-        </>
-      }/>
-      <Statistic statisticInfo={writToday} statisticText={
-        <>
-          Написано<br/>
-          Сегодня
-        </>
-      }/>
+      <Statistic statisticInfo={usersRegistr} statisticText="Пользователей зарегестрировано" />
+      <Statistic
+        statisticInfo={writMessages}
+        statisticText={(
+          <>
+            Сообщений
+            <br />
+            написано
+          </>
+        )}
+      />
+      <Statistic
+        statisticInfo={writToday}
+        statisticText={(
+          <>
+            Написано
+            <br />
+            Сегодня
+          </>
+        )}
+      />
     </>
   );
 }

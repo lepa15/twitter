@@ -1,6 +1,5 @@
 import Post from '@/components/Post/Post';
-import usePosts from '@/hooks/usePosts';
-import { useEffect } from 'react';
+import usePosts from '@/hooks/usePosts.ts';
 
 export default function Posts() {
   const {
@@ -12,7 +11,7 @@ export default function Posts() {
   } = usePosts();
 
   if (loading) {
-    return <div id="loader"></div>;
+    return <div id="loader" />;
   }
 
   if (error) {
@@ -32,7 +31,7 @@ export default function Posts() {
             {postsList.map((post) => {
               const user = usersById[post.userId];
               return (
-                <Post key={post.id} user={user} post={post}/>
+                <Post key={post.id} user={user} post={post} />
               );
             })}
           </ul>

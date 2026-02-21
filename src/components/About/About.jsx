@@ -1,13 +1,13 @@
 import Statistics from '@/components/Statistics/Statistics';
-import useStatistics from '@/hooks/useStatistics';
+import useStatistic from '@/hooks/useStatistic';
 
 export default function About() {
   const {
-    statistics,
+    statistic,
     loading,
     error,
     reload,
-  } = useStatistics();
+  } = useStatistic();
 
   if (loading) {
     return <p>Загрузка...</p>;
@@ -22,12 +22,12 @@ export default function About() {
     );
   }
   return (
-    <>
-      <div className="sm:px-4">
-        <ul className="mx-auto w-full max-w-[60rem] pt-7 pb-9 sm:px-20 sm:py-16 flex items-center flex-col sm:flex-row sm:justify-between gap-8 sm:gap-0 sm:rounded-b-[10px] bg-primary text-white">
-          <Statistics statistics={statistics}/>
-        </ul>
-      </div>
-    </>
+    <div className="sm:px-4">
+      <ul
+        className="mx-auto w-full max-w-[60rem] pt-7 pb-9 sm:px-20 sm:py-16 flex items-center flex-col sm:flex-row sm:justify-between gap-8 sm:gap-0 sm:rounded-b-[10px] bg-primary text-white"
+      >
+        <Statistics statistic={statistic} />
+      </ul>
+    </div>
   );
 }

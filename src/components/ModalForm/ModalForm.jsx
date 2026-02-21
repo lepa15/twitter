@@ -59,47 +59,48 @@ export default function ModalForm({
   };
 
   return (
-    <>
-      <div className="container mx-auto px-4">
-        <div className="modal__handle" {...useSwipeDown(onClose)}></div>
-        <div className="modal__body">
-          <h2 className="modal__title">
-            {authModal === 'registerModal' ? 'Регистрация' : 'Авторизация'}
-          </h2>
-          <form className="modal__form form" onSubmit={handleSubmit}>
-            <Field name="email"
-                   id="email"
-                   type="email"
-                   value={form.email}
-                   onChange={handleChange}
-                   error={errors.email}
-                   labelText={'Электронная почта'}
-            />
-            <Field name="password"
-                   id="password"
-                   type="password"
-                   value={form.password}
-                   onChange={handleChange}
-                   error={errors.password}
-                   labelText={'Пароль'}
-            />
+    <div className="container mx-auto px-4">
+      <div className="modal__handle" {...useSwipeDown(onClose)} />
+      <div className="modal__body">
+        <h2 className="modal__title">
+          {authModal === 'registerModal' ? 'Регистрация' : 'Авторизация'}
+        </h2>
+        <form className="modal__form form" onSubmit={handleSubmit}>
+          <Field
+            name="email"
+            id="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            error={errors.email}
+            labelText="Электронная почта"
+          />
+          <Field
+            name="password"
+            id="password"
+            type="password"
+            value={form.password}
+            onChange={handleChange}
+            error={errors.password}
+            labelText="Пароль"
+          />
 
-            {authModal === 'registerModal' && (
-              <Field name="confirmPassword"
-                     id="confirmPassword"
-                     type="password"
-                     value={form.confirmPassword}
-                     onChange={handleChange}
-                     error={errors.confirmPassword}
-                     labelText={'Повторите пароль'}
-              />
-            )}
-            <button type="submit">
-              {authModal === 'registerModal' ? 'Зарегистрироваться' : 'Войти'}
-            </button>
-          </form>
-        </div>
+          {authModal === 'registerModal' && (
+            <Field
+              name="confirmPassword"
+              id="confirmPassword"
+              type="password"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              error={errors.confirmPassword}
+              labelText="Повторите пароль"
+            />
+          )}
+          <button type="submit">
+            {authModal === 'registerModal' ? 'Зарегистрироваться' : 'Войти'}
+          </button>
+        </form>
       </div>
-    </>
+    </div>
   );
 }
