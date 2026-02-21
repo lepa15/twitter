@@ -6,8 +6,10 @@ export default function TopBloggers() {
         <div className="py-2 flex justify-between items-center gap-8">
           <div className="flex gap-4">
             <div className="w-[48px] h-[48px] shrink-0">
-              <img className="w-full h-auto"
-                src="/Habr.svg" alt="Habr Logo"
+              <img
+                className="w-full h-auto"
+                src="/Habr.svg"
+                alt="Habr Logo"
               />
             </div>
             <div className="flex flex-col justify-center">
@@ -20,8 +22,10 @@ export default function TopBloggers() {
         <div className="py-2 flex justify-between items-center">
           <div className="flex gap-4">
             <div className="w-[48px] h-[48px] shrink-0">
-              <img className="w-full h-auto"
-                   src="/MatchTV.svg" alt="MatchTV Logo"
+              <img
+                className="w-full h-auto"
+                src="/MatchTV.svg"
+                alt="MatchTV Logo"
               />
             </div>
             <div className="flex flex-col justify-center">
@@ -34,8 +38,10 @@ export default function TopBloggers() {
         <div className="py-2 flex justify-between items-center">
           <div className="flex gap-4">
             <div className="w-[48px] h-[48px] shrink-0">
-              <img className="w-full h-auto"
-                   src="/PopMech.svg" alt="PopMech Logo"
+              <img
+                className="w-full h-auto"
+                src="/PopMech.svg"
+                alt="PopMech Logo"
               />
             </div>
             <div className="flex flex-col justify-center">

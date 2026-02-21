@@ -10,12 +10,13 @@ export default function Field({
   return (
     <div className={`form__field ${error ? 'error' : ''}`}>
       <div className="form__contain">
-        <input name={name}
-               id={id}
-               type={type}
-               value={value}
-               onChange={handleChange}
-               placeholder=" "
+        <input
+          name={name}
+          id={id}
+          type={type}
+          value={value}
+          onChange={handleChange}
+          placeholder=" "
         />
         <label htmlFor={name}>{labelText}</label>
       </div>

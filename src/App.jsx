@@ -26,10 +26,10 @@ function App() {
 
   return (
     <div className="w-full max-w-md sm:max-w-7xl mx-auto min-h-screen overflow-hidden">
-      <Header onOpenRegister={handleOpenRegisterModal} onOpenLogin={handleOpenLoginModal}/>
-      <Main/>
-      <Footer onOpenRegister={handleOpenRegisterModal} onOpenLogin={handleOpenLoginModal}/>
-      <Modal authModal={authModal} onClose={handleCloseModal} isOpen={modal.isOpen}/>
+      <Header onOpenRegister={handleOpenRegisterModal} onOpenLogin={handleOpenLoginModal} />
+      <Main />
+      <Footer onOpenRegister={handleOpenRegisterModal} onOpenLogin={handleOpenLoginModal} />
+      <Modal authModal={authModal} onClose={handleCloseModal} isOpen={modal.isOpen} />
     </div>
   );
 }

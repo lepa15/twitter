@@ -1,60 +1,33 @@
 {
-  "extends": "airbnb-base",
-  "env": {
-    "node": true,
-    "es2021": true,
-    "mocha": true,
-    "browser": true
-  },
+  "root": true,
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2020,
     "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "ecmaFeatures": { "jsx": true }
   },
-  "plugins": ["react", "react-hooks"],
-  "settings": {
-    "react": {
-      "version": "detect"
-    },
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".json"]
-      },
-      "alias": {
-        "map": [
-          ["@", "./src"]
-        ],
-        "extensions": [".js", ".jsx", ".json"]
-      }
-    }
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "import", "jsx-a11y"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true
   },
   "rules": {
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never"
-      }
-    ],
-    "prefer-arrow-callback": "off",
-    "linebreak-style": "off",
-    "no-unused-vars": "off"
+    "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off",
+    "no-console": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
   },
-  "overrides": [
-    {
-      "files": ["vite.config.js"],
-      "rules": {
-        "import/no-unresolved": "off",
-        "import/no-extraneous-dependencies": [
-          "error",
-          {
-            "devDependencies": true
-          }
-        ]
-      }
-    }
-  ]
+  "settings": {
+    "react": { "version": "detect" },
+    "import/resolver": { "typescript": {} }
+  }
 }

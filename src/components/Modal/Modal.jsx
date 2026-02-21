@@ -35,9 +35,9 @@ function Modal({
     (isVisible)
       ? (
         <div id="modal" className={`modal ${isAnimated ? 'open' : ''}`}>
-          <div className="overlay" onClick={onClose}></div>
+          <div className="overlay" onClick={onClose} />
           <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-            <ModalForm onClose={onClose} authModal={authModal}/>
+            <ModalForm onClose={onClose} authModal={authModal} />
           </div>
         </div>
       )
