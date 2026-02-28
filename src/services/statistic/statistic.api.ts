@@ -1,8 +1,8 @@
-import { Statistic } from '@/entities/statistic/type';
+import { StatisticProps } from '@/entities/statistic/type';
 import { isStatisticResponse, StatisticResponse } from '@/services/statistic/statistic.type';
 import normalize from '@/services/statistic/statistic.mapper';
 
-export default async function getStatistic(): Promise<Statistic> {
+export default async function getStatistic(): Promise<StatisticProps> {
   const response = await fetch('https://burtovoy.github.io/statistic.json');
   if (!response.ok) throw new Error(response.statusText);
 

@@ -4,40 +4,41 @@ import getAvatars from '@/services/avatars/avatars.api';
 import normalizePostsAdapter from '@/adapters/postsAdapter';
 import { PostsData } from '@/entities/postsAdapter/types';
 
-export default function usePosts() {
-  const [data, setData] = useState<PostsData>({
-    usersById: {},
-    postsList: [],
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+type PostsState =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: PostsData }
+  | { status: 'error'; error: string };
 
-  const loadPosts = useCallback(async ():Promise<void> => {
+type UsePostsReturn = {
+  state: PostsState;
+  refetch: () => Promise<void>;
+};
+
+export default function usePosts(): UsePostsReturn {
+  const [state, setState] = useState<PostsState>({ status: 'idle' });
+
+  const fetchPosts = useCallback(async (): Promise<void> => {
     try {
-      setLoading(true);
-      setError(null);
+      setState({ status: 'loading' });
 
       const [messages, avatars] = await Promise.all([getMessages(), getAvatars()]);
       const result = normalizePostsAdapter(messages, avatars);
-      setData(result);
+
+      setState({ status: 'success', data: result });
     } catch (er) {
-      setError(er as Error);
-    } finally {
-      setLoading(false);
+      setState({ status: 'error', error: String(er) });
     }
   }, []);
 
   useEffect(() => {
     (async () => {
-      await loadPosts();
+      await fetchPosts();
     })();
-  }, [loadPosts]);
+  }, [fetchPosts]);
 
   return {
-    usersById: data.usersById,
-    postsList: data.postsList,
-    loading,
-    error,
-    reload: loadPosts,
+    state,
+    refetch: fetchPosts,
   };
 }

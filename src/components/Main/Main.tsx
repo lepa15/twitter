@@ -7,12 +7,12 @@ import TopBloggers from '@/components/TopBloggers/TopBloggers';
 function Main() {
   return (
     <>
-      <About />
+      <About/>
       <div className="flex justify-center">
-        <Posts />
+        <Posts/>
         <div className="hidden [@media(min-width:720px)]:flex flex-col gap-4 mt-[127px]">
-          <PopularTopics />
-          <TopBloggers />
+          <PopularTopics/>
+          <TopBloggers/>
         </div>
       </div>
     </>

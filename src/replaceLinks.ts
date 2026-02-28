@@ -1,8 +1,8 @@
-export default function replaceLinks(text) {
+export default function replaceLinks(text: string): string {
   const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789.-';
   const specSymbols = '?!,.:;';
 
-  function checkDomain(node) {
+  function checkDomain(node: string): boolean {
     if (!node.includes('.')) return false;
     if (node.startsWith('.') || node.endsWith('.')) return false;
 
@@ -12,7 +12,7 @@ export default function replaceLinks(text) {
     return true;
   }
 
-  function isValidURL(input) {
+  function isValidURL(input: string): false | [string, string]  {
     let trimmed = input.trim();
     let lastSymbol = '';
 

@@ -1,7 +1,7 @@
-export default function highlightHashtags(text) {
+export default function highlightHashtags(text: string): string {
   const arr = text.split(' ');
 
-  function makeLink(anchor) {
+  function makeLink(anchor: string): string {
     const symbols = ['?', ':', ';', ',', '.', '!'];
     let position = -1;
 

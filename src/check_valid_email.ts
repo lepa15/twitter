@@ -1,4 +1,4 @@
-export default function checkValidEmail(email) {
+export default function checkValidEmail(email: string) {
   const emailParts = email.split('@');
   if (emailParts.length !== 2) return false;
 

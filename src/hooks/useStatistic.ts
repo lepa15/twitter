@@ -1,34 +1,41 @@
 import { useEffect, useState, useCallback } from 'react';
 import getStatistic from '@/services/statistic/statistic.api';
+import { StatisticProps } from '@/entities/statistic/type';
 
-export default function useStatistic() {
-  const [statistic, setStatistic] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
 
-  const loadStatistic = useCallback(async (): Promise<void> => {
+type StatisticState =
+    | { status: 'idle' }
+    | { status: 'loading' }
+    | { status: 'success'; data: StatisticProps }
+    | { status: 'error'; error: string; };
+
+type UseStatisticReturn = {
+  state: StatisticState;
+  refetch: () => Promise<void>;
+};
+
+
+export default function useStatistic(): UseStatisticReturn {
+  const [state, setState] = useState<StatisticState>({ status: 'idle' });
+
+  const fetchStatistic = useCallback(async (): Promise<void> => {
     try {
-      setLoading(true);
-      setError(null);
+      setState({ status: 'loading' });
       const result = await getStatistic();
-      setStatistic(result);
+      setState({ status: 'success', data: result });
     } catch (er) {
-      setError(er as Error);
-    } finally {
-      setLoading(false);
+      setState({ status: 'error', error: String(er) });
     }
   }, []);
 
   useEffect(() => {
     (async () => {
-      await loadStatistic();
+      await fetchStatistic();
     })();
-  }, [loadStatistic]);
+  }, [fetchStatistic]);
 
   return {
-    statistic,
-    loading,
-    error,
-    reload: loadStatistic,
+    state,
+    refetch: fetchStatistic,
   };
 }

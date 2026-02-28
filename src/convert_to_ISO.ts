@@ -1,4 +1,4 @@
-export default function convertToISO(dateString) {
+export default function convertToISO(dateString: string): string {
   const [dateStr, timeStr] = dateString.split(' ');
   const [day, month, year] = dateStr.split('.');
   const [hour, minute] = timeStr.split(':');

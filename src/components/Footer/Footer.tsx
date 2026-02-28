@@ -1,9 +1,14 @@
 import './Footer.css';
 
+type FooterProps = {
+  onOpenLogin: () => void;
+  onOpenRegister: () => void;
+};
+
 function Footer({
   onOpenLogin,
   onOpenRegister,
-}) {
+}: FooterProps) {
   return (
     <footer className="pb-8">
       <div className="container mx-auto px-4 sm:max-w-2xl">

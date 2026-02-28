@@ -3,18 +3,20 @@ import ModalForm from '@/components/ModalForm/ModalForm';
 import { useEffect, useState } from 'react';
 import useLockBodyScroll from '@/hooks/useLockBodyScroll';
 
-function Modal({
-  authModal,
-  onClose,
-  isOpen,
-}) {
+export type ModalProps = {
+  authModal: 'registerModal' | 'loginModal' | null;
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+function Modal({ authModal, onClose, isOpen }: ModalProps) {
   useLockBodyScroll(isOpen);
 
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimated, setIsAnimated] = useState(false);
 
   useEffect(() => {
-    let timer;
+    let timer: ReturnType<typeof setTimeout>;
     if (isOpen) {
       setIsVisible(true);
       timer = setTimeout(() => {
@@ -35,9 +37,14 @@ function Modal({
     (isVisible)
       ? (
         <div id="modal" className={`modal ${isAnimated ? 'open' : ''}`}>
-          <div className="overlay" onClick={onClose} />
-          <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-            <ModalForm onClose={onClose} authModal={authModal} />
+          <button
+            className="overlay"
+            onClick={onClose}
+            aria-label="Закрыть модалку"
+            type="button"
+          />
+          <div className="modal__content">
+            <ModalForm isOpen={isOpen} onClose={onClose} authModal={authModal}/>
           </div>
         </div>
       )
