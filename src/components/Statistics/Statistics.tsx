@@ -1,11 +1,8 @@
 import Statistic from '@/components/Statistic/Statistic';
+import type { StatisticProps } from '@/entities/statistic/type';
 
-export default function Statistics({ statistic }) {
-  const {
-    usersRegistr,
-    writMessages,
-    writToday,
-  } = statistic;
+export default function Statistics({ usersRegistr, writMessages, writToday }: StatisticProps) {
+
   return (
     <>
       <Statistic statisticInfo={usersRegistr} statisticText="Пользователей зарегестрировано" />

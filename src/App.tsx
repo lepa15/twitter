@@ -6,8 +6,10 @@ import { useState } from 'react';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/Modal/Modal';
 
+type AuthModal = 'registerModal' | 'loginModal' | null;
+
 function App() {
-  const [authModal, setAuthModal] = useState(null);
+  const [authModal, setAuthModal] = useState<AuthModal>(null);
   const modal = useModal();
 
   const handleOpenRegisterModal = () => {
@@ -26,10 +28,17 @@ function App() {
 
   return (
     <div className="w-full max-w-md sm:max-w-7xl mx-auto min-h-screen overflow-hidden">
-      <Header onOpenRegister={handleOpenRegisterModal} onOpenLogin={handleOpenLoginModal} />
-      <Main />
-      <Footer onOpenRegister={handleOpenRegisterModal} onOpenLogin={handleOpenLoginModal} />
-      <Modal authModal={authModal} onClose={handleCloseModal} isOpen={modal.isOpen} />
+      <Header onOpenRegister={handleOpenRegisterModal}
+              onOpenLogin={handleOpenLoginModal}
+      />
+      <Main/>
+      <Footer onOpenRegister={handleOpenRegisterModal}
+              onOpenLogin={handleOpenLoginModal}
+      />
+      <Modal authModal={authModal}
+             onClose={handleCloseModal}
+             isOpen={modal.isOpen}
+      />
     </div>
   );
 }

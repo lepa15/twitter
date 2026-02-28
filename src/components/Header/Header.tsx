@@ -1,9 +1,14 @@
 import './Header.css';
 
+type HeaderProps = {
+  onOpenLogin: () => void;
+  onOpenRegister: () => void;
+};
+
 function Header({
   onOpenLogin,
   onOpenRegister,
-}) {
+}: HeaderProps) {
   return (
     <div className="sm:flex sm:gap-9 bg-white shadow-[0_12px_24px_-12px_rgba(0,0,0,0.25)]">
       <div className="container mx-auto px-4 sm:w-1/2 sm:pl-16">
@@ -38,7 +43,7 @@ function Header({
           />
           <img
             src="/title-photo-mobile.png"
-            alt="Friends photo"
+            alt="Title"
             className="w-full h-auto sm:h-full object-contain sm:object-cover"
           />
         </picture>

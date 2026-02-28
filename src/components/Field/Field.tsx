@@ -1,3 +1,15 @@
+import { FormState } from '@/components/ModalForm/ModalForm';
+
+type FieldProps = {
+  name: keyof FormState;
+  id: string;
+  type: React.HTMLInputTypeAttribute;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  error?: string;
+  labelText: string;
+};
+
 export default function Field({
   name,
   id,
@@ -6,7 +18,7 @@ export default function Field({
   onChange: handleChange,
   error,
   labelText,
-}) {
+}: FieldProps) {
   return (
     <div className={`form__field ${error ? 'error' : ''}`}>
       <div className="form__contain">

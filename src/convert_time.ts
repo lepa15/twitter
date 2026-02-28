@@ -1,4 +1,4 @@
-export default function convertTime(postDate, currentDate) {
+export default function convertTime(postDate: Date, currentDate: Date): string {
   const post = postDate.getTime();
   const current = currentDate.getTime();
   const diff = current - post;
@@ -9,7 +9,7 @@ export default function convertTime(postDate, currentDate) {
   const months = Math.floor(days / 30);
   const years = Math.floor(days / 365);
 
-  function pluralize(number, one, few, many) {
+  function pluralize(number: number, one: string, few: string, many:string): string {
     const n = Math.abs(number) % 100;
     if (n >= 11 && n <= 14) return many;
 

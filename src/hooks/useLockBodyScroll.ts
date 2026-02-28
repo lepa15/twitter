@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-function useLockBodyScroll(isOpen) {
+function useLockBodyScroll(isOpen: boolean) {
   useEffect(() => {
     const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
 

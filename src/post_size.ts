@@ -1,4 +1,4 @@
-export default function postSize(post) {
+export default function postSize(post: string): number {
   const { length } = Array.from(post);
   const urlRegex = /\b(?:https?:\/\/|www\.|t\.me\/)?(?:[\w-]+\.)+[a-z]{2,}(?:\/[^\s.,!?;:]*)?(?:\?[^\s.,!?;:]*)?(?:#[^\s.,!?;:]*)?/gi;
   const matches = post.match(urlRegex) || [];

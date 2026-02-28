@@ -1,10 +1,14 @@
 import convertTime from '@/convert_time';
 import { useEffect, useState, memo } from 'react';
+import type { User } from '@/entities/postsAdapter/types';
+import type { Post } from '@/entities/postsAdapter/types';
 
-const Post = memo(({
-  user,
-  post,
-}) => {
+type Props = {
+  user: User;
+  post: Post;
+};
+
+const PostItem = memo(({ user, post }: Props) => {
   const [timeAgo, setTimeAgo] = useState('');
 
   useEffect(() => {
@@ -22,7 +26,7 @@ const Post = memo(({
     <li className="messages-item user">
       <div className="user-inner">
         <div className="user-photo">
-          <img src={user.avatar} alt="user photo" />
+          <img src={user.avatar ?? undefined} alt={user.userName}/>
         </div>
         <div className="user-info">
           <div className="user-header name">
@@ -38,7 +42,7 @@ const Post = memo(({
             <p className="user-body-desc">{post.postMessage}</p>
             <div className="user-body-img">
               {post.imgMessage
-                && (<img src={post.imgMessage} alt="message photo" />)}
+                && (<img src={post.imgMessage ?? undefined} alt={post.postMessage}/>)}
             </div>
           </div>
           <div className="user-footer">
@@ -106,4 +110,6 @@ const Post = memo(({
   );
 });
 
-export default Post;
+PostItem.displayName = 'PostItem';
+
+export default PostItem;

@@ -1,21 +1,28 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import validateForm from '@/formValidation';
 import Field from '@/components/Field/Field';
 import useSwipeDown from '@/hooks/useSwipeDown';
+import type { ModalProps } from '@/components/Modal/Modal';
 
-export default function ModalForm({
-  authModal,
-  onClose,
-}) {
-  const [form, setForm] = useState({
+export type FormState = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+export type ErrorsState = Partial<Record<keyof FormState, string>>;
+
+export default function ModalForm({ authModal, onClose }: ModalProps) {
+  const [form, setForm] = useState<FormState>({
     email: '',
     password: '',
     confirmPassword: '',
   });
-  const [errors, setErrors] = useState({});
+
+  const [errors, setErrors] = useState<ErrorsState>({});
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
       }
@@ -26,29 +33,29 @@ export default function ModalForm({
     };
   }, [onClose]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       name,
       value,
     } = e.target;
-    setForm({
-      ...form,
+    setForm((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
     setErrors((prev) => {
       const newErrors = { ...prev };
-      delete newErrors[name];
+      delete newErrors[name as keyof FormState];
       return newErrors;
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationErrors = validateForm(form, authModal);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log(form);
+      //console.log(form);
       setForm({
         email: '',
         password: '',
@@ -93,7 +100,7 @@ export default function ModalForm({
               value={form.confirmPassword}
               onChange={handleChange}
               error={errors.confirmPassword}
-              labelText="Повторите пароль"
+              labelText="Подтвердите пароль"
             />
           )}
           <button type="submit">
