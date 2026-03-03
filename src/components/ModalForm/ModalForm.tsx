@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import validateForm from '@/formValidation';
 import Field from '@/components/Field/Field';
 import useSwipeDown from '@/hooks/useSwipeDown';
-import type { ModalProps } from '@/components/Modal/Modal';
+import { closeModal } from '@/features/authModalSlice/authModalSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/app/store';
+import useEscape from '@/hooks/useEscape';
 
 export type FormState = {
   email: string;
@@ -12,7 +15,7 @@ export type FormState = {
 
 export type ErrorsState = Partial<Record<keyof FormState, string>>;
 
-export default function ModalForm({ authModal, onClose }: ModalProps) {
+export default function ModalForm() {
   const [form, setForm] = useState<FormState>({
     email: '',
     password: '',
@@ -21,17 +24,10 @@ export default function ModalForm({ authModal, onClose }: ModalProps) {
 
   const [errors, setErrors] = useState<ErrorsState>({});
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onClose]);
+  const authModal = useSelector((state: RootState) => state.authModal.modal);
+  const dispatch: AppDispatch = useDispatch();
+
+  useEscape(() => dispatch(closeModal()), Boolean(authModal));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -61,16 +57,16 @@ export default function ModalForm({ authModal, onClose }: ModalProps) {
         password: '',
         confirmPassword: '',
       });
-      onClose();
+      dispatch(closeModal());
     }
   };
 
   return (
     <div className="container mx-auto px-4">
-      <div className="modal__handle" {...useSwipeDown(onClose)} />
+      <div className="modal__handle" {...useSwipeDown(() => dispatch(closeModal()))} />
       <div className="modal__body">
         <h2 className="modal__title">
-          {authModal === 'registerModal' ? 'Регистрация' : 'Авторизация'}
+          {authModal === 'register' ? 'Регистрация' : 'Авторизация'}
         </h2>
         <form className="modal__form form" onSubmit={handleSubmit}>
           <Field
@@ -92,7 +88,7 @@ export default function ModalForm({ authModal, onClose }: ModalProps) {
             labelText="Пароль"
           />
 
-          {authModal === 'registerModal' && (
+          {authModal === 'register' && (
             <Field
               name="confirmPassword"
               id="confirmPassword"
@@ -104,7 +100,7 @@ export default function ModalForm({ authModal, onClose }: ModalProps) {
             />
           )}
           <button type="submit">
-            {authModal === 'registerModal' ? 'Зарегистрироваться' : 'Войти'}
+            {authModal === 'register' ? 'Зарегистрироваться' : 'Войти'}
           </button>
         </form>
       </div>
