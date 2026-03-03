@@ -12,7 +12,8 @@
     "clean": "rm -rf dist",
     "test": "npx jest",
     "lint": "npx eslint src",
-    "fix": "npx eslint src --fix"
+    "fix": "npx eslint src --fix",
+    "start": "node server/app.js"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,7 @@
   "devDependencies": {
     "@types/chai": "^5.2.3",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.2.3",
+    "@types/node": "^25.3.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
@@ -49,13 +50,19 @@
     "jest-environment-jsdom": "^30.2.0",
     "mocha": "^11.7.5",
     "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
     "typescript": "5.5",
     "vite": "^7.2.4"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.1.18",
+    "@types/express": "^5.0.6",
+    "express": "^5.2.1",
+    "json-server": "^1.0.0-beta.12",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "react-redux": "^9.2.0",
     "tailwindcss": "^4.1.18"
   }
 }

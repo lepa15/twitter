@@ -1,14 +1,10 @@
 import './Footer.css';
+import { openLogin, openRegister } from '@/features/authModalSlice/authModalSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/app/store';
 
-type FooterProps = {
-  onOpenLogin: () => void;
-  onOpenRegister: () => void;
-};
-
-function Footer({
-  onOpenLogin,
-  onOpenRegister,
-}: FooterProps) {
+function Footer() {
+  const dispatch: AppDispatch = useDispatch();
   return (
     <footer className="pb-8">
       <div className="container mx-auto px-4 sm:max-w-2xl">
@@ -17,8 +13,8 @@ function Footer({
           и узнайте обо всём первым
         </h1>
         <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-          <button className="auth-button " onClick={onOpenRegister}>Зарегистрироваться</button>
-          <button className="auth-button" onClick={onOpenLogin}>Войти</button>
+          <button className="auth-button " onClick={() => dispatch(openRegister())}>Зарегистрироваться</button>
+          <button className="auth-button" onClick={() => dispatch(openLogin())}>Войти</button>
         </div>
       </div>
     </footer>

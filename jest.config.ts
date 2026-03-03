@@ -1,5 +1,7 @@
-module.exports = {
-  preset: 'ts-jest/presets/default-esm', // ESM preset
+import type { Config } from 'jest';
+
+const config: Config = {
+  preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'jsdom',
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   globals: {
@@ -13,3 +15,5 @@ module.exports = {
   roots: ['<rootDir>/tests'],
   testMatch: ['**/*.test.ts', '**/*.test.tsx'],
 };
+
+export default config;

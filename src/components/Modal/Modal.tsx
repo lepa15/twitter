@@ -2,27 +2,28 @@ import './Modal.css';
 import ModalForm from '@/components/ModalForm/ModalForm';
 import { useEffect, useState } from 'react';
 import useLockBodyScroll from '@/hooks/useLockBodyScroll';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/app/store';
+import { closeModal } from '@/features/authModalSlice/authModalSlice';
 
-export type ModalProps = {
-  authModal: 'registerModal' | 'loginModal' | null;
-  isOpen: boolean;
-  onClose: () => void;
-};
 
-function Modal({ authModal, onClose, isOpen }: ModalProps) {
-  useLockBodyScroll(isOpen);
-
+function Modal() {
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimated, setIsAnimated] = useState(false);
 
+  const authModal = useSelector((state: RootState) => state.authModal.modal);
+  const dispatch: AppDispatch = useDispatch();
+
+  useLockBodyScroll(authModal);
+
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
-    if (isOpen) {
+    if (authModal) {
       setIsVisible(true);
       timer = setTimeout(() => {
         setIsAnimated(true);
       }, 100);
-    } else if (!isOpen) {
+    } else if (!authModal) {
       setIsAnimated(false);
       timer = setTimeout(() => {
         setIsVisible(false);
@@ -31,7 +32,7 @@ function Modal({ authModal, onClose, isOpen }: ModalProps) {
     return () => {
       clearTimeout(timer);
     };
-  }, [isOpen]);
+  }, [authModal]);
 
   return (
     (isVisible)
@@ -39,12 +40,12 @@ function Modal({ authModal, onClose, isOpen }: ModalProps) {
         <div id="modal" className={`modal ${isAnimated ? 'open' : ''}`}>
           <button
             className="overlay"
-            onClick={onClose}
+            onClick={() => dispatch(closeModal())}
             aria-label="Закрыть модалку"
             type="button"
           />
           <div className="modal__content">
-            <ModalForm isOpen={isOpen} onClose={onClose} authModal={authModal}/>
+            <ModalForm/>
           </div>
         </div>
       )
