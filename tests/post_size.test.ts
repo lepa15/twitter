@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import postSize from '@/post_size';
+import postSize from '@/utility/post_size';
 
 describe('Функция проверки расчета размера поста', () => {
   it('1. Без ссылок', () => {

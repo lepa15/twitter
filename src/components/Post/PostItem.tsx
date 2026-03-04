@@ -1,4 +1,4 @@
-import convertTime from '@/convert_time';
+import convertTime from '@/utility/convert_time';
 import { useEffect, useState, memo } from 'react';
 import type { User } from '@/entities/postsAdapter/types';
 import type { Post } from '@/entities/postsAdapter/types';

@@ -1,9 +1,8 @@
-import checkValidEmail from '@/check_valid_email';
+import checkValidEmail from '@/utility/check_valid_email';
 import { ErrorsState, FormState } from '@/components/ModalForm/ModalForm';
-import { ModalProps } from '@/components/Modal/Modal';
 
 
-export default function validateForm(data: FormState, authModal: ModalProps['authModal']) {
+export default function validateForm(data: FormState, authModal: 'login' | 'register' | null) {
   const errors = {} as ErrorsState;
   if (!data.email) {
     errors.email = 'Заполните поле';
@@ -14,13 +13,13 @@ export default function validateForm(data: FormState, authModal: ModalProps['aut
   if (!data.confirmPassword) {
     errors.confirmPassword = 'Заполните поле';
   }
-  if (authModal === 'registerModal' && data.password && data.password.length < 6) {
+  if (authModal === 'register' && data.password && data.password.length < 6) {
     errors.password = 'Пароль должен содержать больше 6 символов';
   }
   if (!checkValidEmail(data.email)) {
     errors.email = 'Адрес не валиден';
   }
-  if (authModal === 'registerModal' && data.password !== data.confirmPassword) {
+  if (authModal === 'register' && data.password !== data.confirmPassword) {
     errors.password = 'Пароли не совпадают';
     errors.confirmPassword = 'Пароли не совпадают';
   }

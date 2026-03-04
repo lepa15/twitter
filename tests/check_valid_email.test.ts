@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import checkValidEmail from '@/check_valid_email';
+import checkValidEmail from '@/utility/check_valid_email';
 
 describe('Функция для проверки валидности имейла', () => {
   it('Валидный имейл', () => {

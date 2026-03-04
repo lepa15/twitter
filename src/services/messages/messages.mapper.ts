@@ -1,6 +1,6 @@
 import type { MessageDTO } from '@/services/messages/messages.types';
 import type { Message } from '@/entities/messages/types';
-import convertToISO from '@/convert_to_ISO';
+import convertToISO from '@/utility/convert_to_ISO';
 
 export function normalize(dto: MessageDTO): Message {
   return {
