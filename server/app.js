@@ -1,4 +1,4 @@
-import 'dotenv/config'; // сразу подхватывает .env
+import 'dotenv/config';
 import express from 'express';
 import pkg from 'pg';
 const { Client } = pkg;
@@ -21,7 +21,11 @@ client.connect()
   .catch(err => console.error('Connection error:', err.stack));
 
 app.get('/', (req, res) => {
-  res.send('Проверка связи!!!');
+  res.send('Проверка связи!');
+});
+
+app.get('/posts.json',async (req, res) => {
+  //  логика
 });
 
 const port = process.env.PORT || 3000;
