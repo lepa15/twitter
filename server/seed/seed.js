@@ -1,0 +1,82 @@
+import bcrypt from 'bcrypt';
+
+const fakeMessages = [
+  {
+    'id': '1',
+    'user_id': '1',
+    'name': 'Винсет Вега',
+    'password': 123456,
+    'mail': '@roizmangbn',
+    'message': 'У них там все немного не так. В смысле, у них там все точно так же, как и здесь, только немного по-другому.',
+    'date': '23.10.2023 16:57',
+    'quantityReposts': '21',
+    'quantityLike': '23',
+    'quantityShare': '9'
+
+  },
+  {
+    'id': '2',
+    'user_id': '2',
+    'name': 'Elon Musk',
+    'password': 123456,
+    'mail': '@elonmusk',
+    'message': 'Has anyone seen web3? I can’t find it.',
+    'date': '23.10.2023 11:03',
+    'quantityReposts': '23',
+    'quantityLike': '53',
+    'quantityShare': '4'
+  },
+  {
+    'id': '3',
+    'user_id': '3',
+    'name': 'Александр',
+    'password': 123456,
+    'mail': '@sportsru',
+    'message': 'Прикладываю фотки с последнего матча. С каждым днем играю все лучше. Еще пару лет и можно на Олимпиаду ехать!',
+    'img_message': 'https://burtovoy.github.io/img/tennis-img.jpg',
+    'date': '19.10.2023 20:15',
+    'quantityReposts': '12',
+    'quantityLike': '80',
+    'quantityShare': '1'
+  },
+  {
+    'id': '4',
+    'user_id': '4',
+    'name': 'Мия Уоллес',
+    'password': 123456,
+    'mail': '@mia',
+    'message': 'Идут по улице три помидора: папа-помидор, мама-помидор и ребенок-помидор. Ребенок-помидор начинает отставать. Папа-помидор разозлился, подбегает к ребенку-помидору, раздавливает всмятку... и говорит: «Догоняй, кетчуп!»',
+    'date': '17.10.2023 9:30',
+    'quantityReposts': '21',
+    'quantityLike': '23',
+    'quantityShare': '9'
+  }
+];
+
+const fakeAvatars = [
+  {
+    'user_id': '1',
+    'url': 'https://burtovoy.github.io/img/vins-avatar.png'
+  },
+  {
+    'user_id': '2',
+    'url': 'https://burtovoy.github.io/img/elon-avatar.png'
+  },
+  {
+    'user_id': '3',
+    'url': 'https://burtovoy.github.io/img/alexsandr-avatar.png'
+  },
+  {
+    'user_id': '4',
+    'url': 'https://burtovoy.github.io/img/mia-avatar.png'
+  }
+];
+
+const fakeStatistic = {
+  'usersRegistr': '20',
+  'writMessages': '556',
+  'writToday': '58'
+};
+
+
+

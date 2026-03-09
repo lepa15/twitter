@@ -1,31 +1,19 @@
 import 'dotenv/config';
 import express from 'express';
-import pkg from 'pg';
-const { Client } = pkg;
+import usersRouters from './routes/users.routes.js';
+import postsRouters from './routes/posts.routes.js';
 
 const app = express();
 app.use(express.json());
 
-const client = new Client({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+app.use('/', usersRouters);
+app.use('/', postsRouters);
 
-client.connect()
-  .then(() => {
-    console.log('Connected to DB');
-  })
-  .catch(err => console.error('Connection error:', err.stack));
-
-app.get('/', (req, res) => {
-  res.send('Проверка связи!');
-});
-
-app.get('/posts.json',async (req, res) => {
-  //  логика
+// Error middleware
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500)
+    .json({ message: 'Server Error' });
 });
 
 const port = process.env.PORT || 3000;

@@ -15,7 +15,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/posts.json': 'http://localhost:3000'
+      '/users.json': 'http://localhost:3000'
     }
   },
   resolve: {
