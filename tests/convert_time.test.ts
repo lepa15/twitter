@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import convertTime from '@/convert_time';
+import convertTime from '@/utility/convert_time';
 
 describe('Функция для преобразования числа во время', () => {
   it("должно вернуть 'только что' если прошло < 1 минуты", () => {

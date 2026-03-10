@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import validateForm from '@/formValidation';
+import validateForm from '@/utility/formValidation';
 import Field from '@/components/Field/Field';
 import useSwipeDown from '@/hooks/useSwipeDown';
 import { closeModal } from '@/features/authModalSlice/authModalSlice';

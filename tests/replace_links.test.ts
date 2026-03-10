@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import replaceLinks from '@/replaceLinks';
+import replaceLinks from '@/utility/replaceLinks';
 
 describe('replaceLinks', () => {
   it('1) Преобразует ссылку в середине текста', () => {

@@ -13,6 +13,11 @@ export default defineConfig({
     emptyOutDir: false,
   },
   plugins: [react(), tailwindcss()],
+  server: {
+    proxy: {
+      '/users.json': 'http://localhost:3000'
+    }
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

@@ -10,7 +10,7 @@ function Main() {
       <About/>
       <div className="flex justify-center">
         <Posts/>
-        <div className="hidden [@media(min-width:720px)]:flex flex-col gap-4 mt-[127px]">
+        <div className="hidden [@media(min-width:720px)]:flex flex-col gap-4 mt-[127px] pr-4">
           <PopularTopics/>
           <TopBloggers/>
         </div>
