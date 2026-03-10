@@ -6,9 +6,10 @@
   "description": "",
   "main": "main.jsx",
   "scripts": {
-    "dev": "concurrently \"npm run start\" \"npm run frontend\"",
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
     "frontend": "vite",
-    "start": "nodemon server/app.js",
+    "server": "nodemon server/app.js",
+    "start": "node server/app.js",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
