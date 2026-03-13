@@ -4,6 +4,9 @@ import { ErrorsState, FormState } from '@/components/ModalForm/ModalForm';
 
 export default function validateForm(data: FormState, authModal: 'login' | 'register' | null) {
   const errors = {} as ErrorsState;
+  if (!data.userName) {
+    errors.userName = 'Заполните поле';
+  }
   if (!data.email) {
     errors.email = 'Заполните поле';
   }

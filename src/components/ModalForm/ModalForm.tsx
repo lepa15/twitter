@@ -6,8 +6,10 @@ import { closeModal } from '@/features/authModalSlice/authModalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/app/store';
 import useEscape from '@/hooks/useEscape';
+import { useCreateUserMutation } from '@/features/usersApi/usersApi';
 
 export type FormState = {
+  userName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -16,7 +18,10 @@ export type FormState = {
 export type ErrorsState = Partial<Record<keyof FormState, string>>;
 
 export default function ModalForm() {
+  const [createUser] = useCreateUserMutation();
+
   const [form, setForm] = useState<FormState>({
+    userName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -45,19 +50,31 @@ export default function ModalForm() {
     });
   };
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationErrors = validateForm(form, authModal);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      //console.log(form);
-      setForm({
-        email: '',
-        password: '',
-        confirmPassword: '',
-      });
-      dispatch(closeModal());
+      try {
+        await createUser({
+          username: form.userName,
+          email: form.email,
+          password: form.password,
+        }).unwrap();
+        alert('Registration was successful');
+        setForm({
+          userName: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        });
+        dispatch(closeModal());
+      } catch (err: any) {
+        if (err.status === 409) {
+          alert('User already exists');
+        }
+      }
     }
   };
 
@@ -69,6 +86,17 @@ export default function ModalForm() {
           {authModal === 'register' ? 'Регистрация' : 'Авторизация'}
         </h2>
         <form className="modal__form form" onSubmit={handleSubmit}>
+          {authModal === 'register' && (
+            <Field
+              name="userName"
+              id="userName"
+              type="userName"
+              value={form.userName}
+              onChange={handleChange}
+              error={errors.userName}
+              labelText="Имя пользователя"
+            />
+          )}
           <Field
             name="email"
             id="email"
