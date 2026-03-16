@@ -10,14 +10,21 @@ export async function getUsers(req, res, next) {
   }
 }
 
-/*export async function getOneUser(req, res, next) {
+export async function getOneUser(req, res, next) {
   try {
     const userId = req.params.id;
-    const user = await pool.query('')
+    const result = await pool.query('SELECT * FROM users WHERE id=$1', [userId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404)
+        .json({ message: 'No user with this id' });
+    }
+
+    res.json(result.rows[0]);
   } catch (err) {
     next(err);
   }
-}*/
+}
 
 export async function createUser(req, res, next) {
   const {
@@ -46,6 +53,34 @@ export async function createUser(req, res, next) {
   }
 }
 
+export async function loginUser(req, res, next) {
+  const {
+    email,
+    password
+  } = req.body;
+  try {
+    const result = await pool.query(
+      'SELECT * FROM users WHERE email=$1', [email]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401)
+        .json({ message: 'Invalid email or password' });
+    }
+
+    const user = result.rows[0];
+    const isMatch = await bcrypt.compare(password, user.password_hash);
+
+    if (!isMatch) {
+      return res.status(401)
+        .json({ message: 'Invalid email or password' });
+    }
+
+    return res.status(200);
+  } catch (err) {
+    next(err);
+  }
+}
 
 
 
