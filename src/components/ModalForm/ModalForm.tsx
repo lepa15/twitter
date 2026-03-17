@@ -6,7 +6,7 @@ import { closeModal } from '@/features/authModalSlice/authModalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/app/store';
 import useEscape from '@/hooks/useEscape';
-import { useCreateUserMutation } from '@/features/usersApi/usersApi';
+import { useCreateUserMutation, useLoginUserMutation } from '@/features/usersApi/usersApi';
 
 export type FormState = {
   userName: string;
@@ -19,6 +19,7 @@ export type ErrorsState = Partial<Record<keyof FormState, string>>;
 
 export default function ModalForm() {
   const [createUser] = useCreateUserMutation();
+  const [loginUser] = useLoginUserMutation();
 
   const [form, setForm] = useState<FormState>({
     userName: '',
@@ -50,7 +51,7 @@ export default function ModalForm() {
     });
   };
 
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleRegister = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationErrors = validateForm(form, authModal);
     setErrors(validationErrors);
@@ -62,6 +63,7 @@ export default function ModalForm() {
           email: form.email,
           password: form.password,
         }).unwrap();
+
         alert('Registration was successful');
         setForm({
           userName: '',
@@ -69,10 +71,41 @@ export default function ModalForm() {
           password: '',
           confirmPassword: '',
         });
+
         dispatch(closeModal());
       } catch (err: any) {
         if (err.status === 409) {
           alert('User already exists');
+        }
+      }
+    }
+  };
+
+  const handleLogin = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const validationErrors = validateForm(form, authModal);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        await loginUser({
+          email: form.email,
+          password: form.password,
+        }).unwrap();
+
+        alert('Login was successful');
+
+        setForm({
+          userName: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        });
+
+        dispatch(closeModal());
+      } catch (err: any) {
+        if (err.status === 401) {
+          alert('Login failed with incorrect credentials');
         }
       }
     }
@@ -85,7 +118,11 @@ export default function ModalForm() {
         <h2 className="modal__title">
           {authModal === 'register' ? 'Регистрация' : 'Авторизация'}
         </h2>
-        <form className="modal__form form" onSubmit={handleSubmit}>
+        <form className="modal__form form"
+              onSubmit={authModal === 'register'
+                ? handleRegister
+                : handleLogin}
+        >
           {authModal === 'register' && (
             <Field
               name="userName"

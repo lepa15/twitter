@@ -30,7 +30,7 @@ export async function createUser(req, res, next) {
   const {
     username,
     email,
-    password
+    password,
   } = req.body;
 
   const passwordHash = await bcrypt.hash(password, 10);
@@ -45,7 +45,7 @@ export async function createUser(req, res, next) {
     if (err.code === '23505') {
       return res.status(409)
         .json({
-          message: 'Email already exists'
+          message: 'Email already exists',
         });
     }
 
@@ -56,11 +56,11 @@ export async function createUser(req, res, next) {
 export async function loginUser(req, res, next) {
   const {
     email,
-    password
+    password,
   } = req.body;
   try {
     const result = await pool.query(
-      'SELECT * FROM users WHERE email=$1', [email]
+      'SELECT * FROM users WHERE email=$1', [email],
     );
 
     if (result.rows.length === 0) {
@@ -76,7 +76,8 @@ export async function loginUser(req, res, next) {
         .json({ message: 'Invalid email or password' });
     }
 
-    return res.status(200);
+    return res.status(200)
+      .json(result.rows[0]);
   } catch (err) {
     next(err);
   }

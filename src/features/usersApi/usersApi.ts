@@ -14,6 +14,11 @@ export interface CreateUserDto {
   password: string;
 }
 
+export interface LoginUserDto {
+  email: string;
+  password: string;
+}
+
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
@@ -25,7 +30,7 @@ export const usersApi = createApi({
     }),
     createUser: builder.mutation<User, CreateUserDto>({
       query: (newUser) => ({
-        url: '/createUser',
+        url: '/users',
         method: 'POST',
         body: newUser,
       }),
@@ -35,6 +40,13 @@ export const usersApi = createApi({
       query: (id) => `users/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'Users', id }],
     }),
+    loginUser: builder.mutation<User, LoginUserDto>({
+      query: (logData) => ({
+        url: '/login',
+        method: 'POST',
+        body: logData,
+      }),
+    }),
   }),
 });
 
@@ -42,5 +54,6 @@ export const {
   useGetUsersQuery,
   useCreateUserMutation,
   useGetUserByIdQuery,
+  useLoginUserMutation,
 } = usersApi;
 
