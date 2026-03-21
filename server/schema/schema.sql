@@ -8,7 +8,15 @@ CREATE TABLE users
     password_hash TEXT        NOT NULL,
     username      TEXT UNIQUE,
     avatar_url    TEXT,
-    created_at    TIMESTAMPTZ        DEFAULT NOW()
+    created_at    TIMESTAMPTZ      DEFAULT NOW()
+);
+
+CREATE TABLE sessions
+(
+    id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id    UUID REFERENCES users (id) ON DELETE CASCADE,
+    token      VARCHAR(255) NOT NULL,
+    created_at TIMESTAMPTZ      DEFAULT NOW()
 );
 
 CREATE TABLE posts
@@ -28,7 +36,7 @@ CREATE TABLE likes
     PRIMARY KEY (user_id, post_id)
 );
 
-SELECT posts.id AS post_id,
+SELECT posts.id             AS post_id,
        COUNT(likes.user_id) AS likes_count
 FROM posts
          LEFT JOIN likes ON likes.post_id = posts.id

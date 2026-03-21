@@ -1,5 +1,6 @@
 import { pool } from '../db/index.js';
 import bcrypt from 'bcrypt';
+import { createSession, setAuthCookies } from './authMiddleware.controller.js';
 
 export async function getUsers(req, res, next) {
   try {
@@ -35,12 +36,21 @@ export async function createUser(req, res, next) {
 
   const passwordHash = await bcrypt.hash(password, 10);
   try {
-    const result = await pool.query(
+    const userResult = await pool.query(
       'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, created_at',
-      [username, email, passwordHash],
+      [username, email, passwordHash]
     );
+
+    const user = userResult.rows[0];
+
+    const token = await createSession(user.id);
+    setAuthCookies(res, token, user.email);
+
     res.status(201)
-      .json(result.rows[0]);
+      .json({
+        message: 'User created',
+      });
+
   } catch (err) {
     if (err.code === '23505') {
       return res.status(409)
@@ -75,6 +85,9 @@ export async function loginUser(req, res, next) {
       return res.status(401)
         .json({ message: 'Invalid email or password' });
     }
+
+    const token = await createSession(user.id);
+    setAuthCookies(res, token, user.email);
 
     return res.status(200)
       .json(result.rows[0]);
