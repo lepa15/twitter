@@ -19,9 +19,13 @@ export interface LoginUserDto {
   password: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+const API_URL = import.meta.env.VITE_API_URL!;
+
 export const usersApi = createApi({
   reducerPath: 'usersApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}/api` }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
     getUsers: builder.query<User[], void>({
@@ -37,7 +41,7 @@ export const usersApi = createApi({
       invalidatesTags: ['Users'],
     }),
     getUserById: builder.query<User, string>({
-      query: (id) => `users/${id}`,
+      query: (id) => `/users/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'Users', id }],
     }),
     loginUser: builder.mutation<User, LoginUserDto>({
