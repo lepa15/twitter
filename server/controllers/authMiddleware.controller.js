@@ -60,3 +60,7 @@ export async function authMiddleware(req, res, next) {
     next(err);
   }
 }
+
+export async function checkAuthentication(req, res, next) {
+  res.json({cookies: req.cookies});
+}
