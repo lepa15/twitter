@@ -2,12 +2,11 @@ import { Router } from 'express';
 
 const router = new Router();
 import { createUser, getOneUser, getUsers, loginUser } from '../controllers/users.controller.js';
-import { checkAuthentication } from '../controllers/authMiddleware.controller.js';
 
 router.get('/users', getUsers);
 router.post('/users', createUser);
 router.get('/users/:id', getOneUser);
 router.post('/login', loginUser);
-router.get('/check-auth', checkAuthentication);
+
 
 export default router;

@@ -17,14 +17,14 @@ export function setAuthCookies(res, token, email) {
   res.cookie('token', token, {
     httpOnly: true,
     secure: isProduction,
-    sameSite: isProduction ? 'none': 'lax',
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
   res.cookie('email', email, {
     httpOnly: true,
     secure: isProduction,
-    sameSite: isProduction ? 'none': 'lax',
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 }
@@ -54,13 +54,17 @@ export async function authMiddleware(req, res, next) {
         .send({ message: 'Недействительный токен' });
     }
 
-    res.status(200)
-      .send('ok');
+    req.userId = result.rows[0].user_id;
+    next();
   } catch (err) {
     next(err);
   }
 }
 
 export async function checkAuthentication(req, res, next) {
-  res.json({cookies: req.cookies});
+  res.status(200)
+    .json({
+      message: 'Авторизован',
+      userId: req.userId
+    });
 }
