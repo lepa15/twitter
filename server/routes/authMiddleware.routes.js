@@ -4,7 +4,6 @@ import { authMiddleware, checkAuthentication } from '../controllers/authMiddlewa
 
 const router = new Router();
 
-router.get('/protected-route', authMiddleware);
-router.get('/check-auth',authMiddleware, checkAuthentication);
+router.get('/protected-route', authMiddleware, checkAuthentication);
 
 export default router;

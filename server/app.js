@@ -6,7 +6,6 @@ import authMiddlewareRouters from './routes/authMiddleware.routes.js';
 import { pool } from './db/index.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import checkAuthRouters from './routes/users.routes.js';
 
 const app = express();
 app.use(cors({
@@ -22,7 +21,6 @@ app.use(cookieParser());
 app.use('/api', usersRouters);
 app.use('/api', postsRouters);
 app.use('/api', authMiddlewareRouters);
-app.use('/api', checkAuthRouters);
 
 // Error middleware
 app.use((err, req, res, next) => {
