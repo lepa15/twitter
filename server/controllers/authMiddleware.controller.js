@@ -13,17 +13,18 @@ export async function createSession(userId) {
 }
 
 export function setAuthCookies(res, token, email) {
+  const isProduction = process.env.NODE_ENV === 'production';
   res.cookie('token', token, {
     httpOnly: true,
-    secure: false,
-    sameSite: 'none',
+    secure: isProduction,
+    sameSite: isProduction ? 'none': 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
   res.cookie('email', email, {
     httpOnly: true,
-    secure: false,
-    sameSite: 'none',
+    secure: isProduction,
+    sameSite: isProduction ? 'none': 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 }
