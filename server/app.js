@@ -5,8 +5,16 @@ import postsRouters from './routes/posts.routes.js';
 import authMiddlewareRouters from './routes/authMiddleware.routes.js';
 import { pool } from './db/index.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app = express();
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://twitter-ap54.onrender.com'
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 interface User {
-  id: number;
+  id: string;
   email: string;
   username: string;
   avatar_url: string | null;
@@ -25,7 +25,10 @@ const API_URL = import.meta.env.VITE_API_URL!;
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}/api` }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${API_URL}/api`,
+    credentials: 'include',
+  }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
     getUsers: builder.query<User[], void>({
