@@ -96,5 +96,26 @@ export async function loginUser(req, res, next) {
   }
 }
 
+export async function feed(req, res, next) {
+  const userId = req.params.userId;
+
+  try {
+    const result = await pool.query(
+      'SELECT * FROM users WHERE id = $1', [userId],
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401)
+        .json({ message: 'Invalid email or password' });
+    }
+    return res.status(200)
+      .json(result.rows[0]);
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+
 
 

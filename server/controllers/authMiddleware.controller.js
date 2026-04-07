@@ -60,11 +60,3 @@ export async function authMiddleware(req, res, next) {
     next(err);
   }
 }
-
-export async function checkAuthentication(req, res, next) {
-  res.status(200)
-    .json({
-      message: 'Авторизован',
-      userId: req.userId
-    });
-}

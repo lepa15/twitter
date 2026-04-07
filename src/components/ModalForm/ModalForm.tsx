@@ -6,7 +6,7 @@ import { closeModal } from '@/features/authModalSlice/authModalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/app/store';
 import useEscape from '@/hooks/useEscape';
-import { useCreateUserMutation, useLoginUserMutation } from '@/features/usersApi/usersApi';
+import { useCreateUserMutation, useFeedQuery, useLoginUserMutation } from '@/features/usersApi/usersApi';
 
 export type FormState = {
   userName: string;

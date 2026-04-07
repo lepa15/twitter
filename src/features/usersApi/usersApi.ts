@@ -54,6 +54,10 @@ export const usersApi = createApi({
         body: logData,
       }),
     }),
+    feed: builder.query<User, void>({
+      query:() => '/feed',
+      providesTags: ['Users'],
+    }),
   }),
 });
 
@@ -62,5 +66,6 @@ export const {
   useCreateUserMutation,
   useGetUserByIdQuery,
   useLoginUserMutation,
+  useFeedQuery,
 } = usersApi;
 
